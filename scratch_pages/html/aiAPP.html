@@ -1,0 +1,142 @@
+<!-- Tyler McCoy. IS 201 002. 4/16/25 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Hard to Use Calculator</title>
+  <style>
+    /* Enlarged styling for the calculator */
+    /* body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+    } */
+    #calculator {
+      display: inline-block;
+      border: 2px solid #444;
+      padding: 30px;
+      border-radius: 10px;
+      background-color: rgb(58, 58, 58);
+    }
+    #display {
+      width: 320px;
+      height: 70px;
+      margin-bottom: 15px;
+      border: 1px solid #444;
+      text-align: right;
+      font-size: 1.6em;
+      padding: 10px;
+      overflow-x: auto;
+      word-wrap: break-word;
+      background-color: white;
+    }
+    .button {
+      width: 70px;
+      height: 70px;
+      margin: 5px;
+      font-size: 1.4em;
+      cursor: pointer;
+      background-color: grey;
+    }
+  </style>
+  <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    <div class="header">    
+        <h4>Welcome To The Hard to Use Calculator</h4>
+        <div class="subHeader">
+            <a href="../../scratch.html">Scratch Page</a>
+            <a href="../../index.html">Resume</a>
+        </div>
+    </div>
+    <br>
+
+    <div id="calculator">
+    <div id="display"></div>
+    <div>
+      <button class="button" data-value="7">7</button>
+      <button class="button" data-value="8">8</button>
+      <button class="button" data-value="9">9</button>
+      <button class="button" data-value="/">/</button>
+    </div>
+    <div>
+      <button class="button" data-value="4">4</button>
+      <button class="button" data-value="5">5</button>
+      <button class="button" data-value="6">6</button>
+      <button class="button" data-value="*">*</button>
+    </div>
+    <div>
+      <button class="button" data-value="1">1</button>
+      <button class="button" data-value="2">2</button>
+      <button class="button" data-value="3">3</button>
+      <button class="button" data-value="-">-</button>
+    </div>
+    <div>
+      <button class="button" data-value="0">0</button>
+      <button class="button" data-value=".">.</button>
+      <button class="button" id="equals" data-value="=">=</button>
+      <button class="button" data-value="+">+</button>
+    </div>
+  </div>
+
+  <script>
+    // Get the display element and initialize the expression string.
+    const display = document.getElementById('display');
+    let currentExpression = "";
+
+    // Select all buttons.
+    const buttons = document.querySelectorAll('.button');
+
+    buttons.forEach(button => {
+      // Randomly hide a button with a lower chance (10%).
+      if (Math.random() < 0.1) {
+        button.style.visibility = 'hidden';
+      } else {
+        // Set up multiple-click behavior.
+        // Each button requires between 2 and 4 clicks to register.
+        button.dataset.clicks = 0;
+        button.dataset.threshold = Math.floor(Math.random() * 3) + 2;
+
+        // Attach a click event listener.
+        button.addEventListener('click', () => {
+          // Increment the click count.
+          button.dataset.clicks = Number(button.dataset.clicks) + 1;
+          
+          // Wait until the required click threshold is reached.
+          if (Number(button.dataset.clicks) < Number(button.dataset.threshold)) {
+            return;
+          }
+          // Reset click counter.
+          button.dataset.clicks = 0;
+          
+          // Get the button's value.
+          const val = button.getAttribute('data-value');
+
+          // If the equals button is pressed, decide to show an error or evaluate.
+          if (val === "=") {
+            // With a 20% chance, show an error.
+            if (Math.random() < 0.2) {
+              display.textContent = "error: I don't like math so you're on your own";
+              currentExpression = "";
+              return;
+            }
+            // Otherwise, try to evaluate the expression.
+            try {
+              currentExpression = eval(currentExpression);
+            } catch (e) {
+              currentExpression = "Error";
+            }
+            display.textContent = currentExpression;
+            currentExpression = "";
+          } else {
+            // Append the clicked button's value.
+            currentExpression += val;
+            display.textContent = currentExpression;
+          }
+        });
+      }
+    });
+  </script>
+  <div class="footer">WWW.WebsiteName.com | Tyler G. McCoy</div>
+</body>
+</html>

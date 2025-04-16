@@ -1,0 +1,44 @@
+/* Tyler McCoy. IS 201 002. 4/16/25 */
+h4 {
+    font-size: large;
+}
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: cornsilk;
+}
+
+.storyListHeading {
+    font-weight: bold;
+    color: rgb(80, 18, 10);
+}
+
+li {
+    font-weight: normal;
+    color: black;
+}
+
+.footer {
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    height: 25px;
+    font-size: 8px;
+    color: #555555;
+    text-align: center;
+    padding-top: 15px;
+    position: fixed;
+    border: transparent;
+}
+
+.header {
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    height: 30px;
+    border-bottom:solid black;
+    border-width: 1px;
+}
+
+.subHeader {
+    float: right;
+}
